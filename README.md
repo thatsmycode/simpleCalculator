@@ -33,3 +33,13 @@ The application provides error hadling for the following scenarios:
 - Invalid inputs
 - Ensures that the request is made via the website form and not externally
 
+## Security
+
+As the application uses sessions to store in memory the operations the following mesures have been implemented:
+
+- Ensure PHP sessions are only maintained using cookies
+- Enable strict mode to help prevent session fixation attacks
+- One hour or session lifetime 
+- Specify the domain where the application is deployed to prevent cookies being send to other domains
+- Ensure that the session cookie is sent over secure connection
+- Restrict the session cookie from being accessed via client-side scripts
