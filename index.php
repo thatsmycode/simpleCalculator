@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Unset the session variables to clean the operations history.
+if (isset($_POST['clean_session'])) {
+    session_unset();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +18,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="calculator-body">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="calculator-form">
+<body class="body">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="form">
         <label for="userName" class="label">Please identify yourself</label>
         <input type="text" name="userName" id="userName" placeholder="Your name (required)" required class="input">
         <br>
@@ -31,19 +40,44 @@
     $operand_2 = "";
     $operand_3 = "";
     $result = "";
-    $finalResult= "";
+    $finalResult = "";
 
     $error = false;
     $errorMessage = "";
 
     $sum = true; //by default we sum 
 
-    $historyArray = [];
+    $historyArray = (array) (isset($_SESSION["sessionList"]) ? $_SESSION["sessionList"] : []);
     $OperationFound = false;
     $previousUser = "";
     $historyMessage = "This operation has been already done by " . $previousUser;
 
+    class Operation
+    {
 
+        private $user = "";
+        private $content = [];
+        private $result = "";
+
+        public function __construct($user, $content, $result)
+        {
+            $this->user = $user;
+            $this->content = $content;
+            $this->result = $result;
+        }
+        public function getUser()
+        {
+            return $this->user;
+        }
+        public function getContent()
+        {
+            return implode("+", $this->content);
+        }
+        public function getResult()
+        {
+            return $this->result;
+        }
+    }
 
 
 
@@ -74,31 +108,76 @@
             $sum = false;
         }
 
-        // if no error and sum, we add. if not concatenate
-        if (!$error && $sum === true) {
-            $result = (int)$operand_1 + (int)$operand_2;
+        //if history array is not empy, search for coincidences
+        for ($i = 0; $i < count($historyArray); $i++) {
 
-            if ($operand_3) {
-                $result += (int)$operand_3;
+            $currentContent = $historyArray[$i]->getContent();
+
+            if ($currentContent == implode("+", [$operand_1, $operand_2]) || $currentContent == implode("+", [$operand_1, $operand_2, $operand_3])) {
+                $OperationFound = true;
+                $previousUser = $historyArray[$i]->getUser();
+                $finalResult = $historyArray[$i]->getResult();
+                break;
+            } else {
+                $previousUser = "";
+                $OperationFound = false;
+            }
+        }
+        //if its not found we execute the calculations, if not we skip
+        if (!$OperationFound) {
+
+            // if no error and sum, we add. if not concatenate
+            if (!$error && $sum === true) {
+                $result = (int)$operand_1 + (int)$operand_2;
+
+                if ($operand_3) {
+                    $result += (int)$operand_3;
+                }
+
+                $finalResult = (int)$result;
+            } else if (!$error) {
+                $finalResult = $operand_1 . $operand_2 . $operand_3;
             }
 
-            $finalResult = (int)$result;
-        } else if (!$error) {
-            $finalResult = $operand_1 . $operand_2 . $operand_3;
+            // If no error is found, a new Operation instance is stored in the historyArray.
+            if (!$error) {
+
+                $operands = [$operand_1, $operand_2];
+
+                if (isset($operand_3)) {
+                    array_push($operands, $operand_3);
+                }
+
+                $newOperation = new Operation($userName, $operands, $finalResult);
+
+                $historyArray[] = $newOperation;
+
+                $_SESSION["sessionList"] = $historyArray;
+            }
         }
-?>
-<section class="results">
-    <?php
+    ?>
         
-       
+
+        <section class="results">
+        <?php
+
         if ($error) {
             echo $errorMessage;
-        }else{
+        } else {
+
+            if ($OperationFound) {
+                echo "This operation was previously submited by: " . $previousUser;
+            }
+            echo "<br>";
             echo $finalResult;
         }
     }
-    ?>
-    </section>
+    
+        ?>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form">
+            <button type="submit" name="clean_session" >Delete operations history</button>
+        </form>
+        </section>
 </body>
 
 </html>
