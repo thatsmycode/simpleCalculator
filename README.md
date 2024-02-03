@@ -1,7 +1,7 @@
 # simpleCalculator
 This part of a technical test for a junior position.
 
-# Deplyed project link
+# Deployed project link
 https://simplecalculator.adaptable.app/
 
 ## Objectives:
