@@ -17,18 +17,25 @@ session_start();
 <body class="body">
     <section>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form">
-            <label for="userName" class="form-label">Please identify yourself</label>
+            <label for="userName" class="label">Please identify yourself</label>
             <input type="text" name="userName" id="userName" placeholder="Your name (required)" class="input" required>
             <br>
-            <br>
+            <label class="label"> Introduce only alphanumeric characters</label>
             <input type="text" name="operand1" id="operand1" placeholder="First input (required)" class="input" required>
-            <label class="operator-label">+</label>
+            <label class="label">+</label>
             <input type="text" name="operand2" id="operand2" placeholder="Second input (required)" class="input" required>
-            <label class="operator-label">+</label>
+            <label class="label">+</label>
             <input type="text" name="operand3" id="operand3" placeholder="Third input (optional)" class="input">
-            <button type="submit" class="calculate-button">=</button>
+            <button type="submit" class="calculate button">=</button>
         </form>
 
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form">
+            <button type="submit" name="clean_session" class="clean button">Delete operations history</button>
+        </form>
+
+    </section>
+
+    <section class="results">
         <?php
         // Check the submission of the form and assing inputs to variables.
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userName"]) && isset($_POST["operand1"]) && isset($_POST["operand2"])) {
@@ -48,11 +55,9 @@ session_start();
             session_unset();
         }
         ?>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form">
-            <button type="submit" name="clean_session" class="delete-history-button">Delete operations history</button>
-        </form>
+        </section>
+        
 
-    </section>
 </body>
 
 </html>
