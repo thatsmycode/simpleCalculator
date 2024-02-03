@@ -86,9 +86,11 @@
         } else if (!$error) {
             $finalResult = $operand_1 . $operand_2 . $operand_3;
         }
-
-        echo $operand_1 . $operand_2 . $operand_3;
-        echo "<br>";
+?>
+<section class="results">
+    <?php
+        
+       
         if ($error) {
             echo $errorMessage;
         }else{
@@ -96,7 +98,7 @@
         }
     }
     ?>
-
+    </section>
 </body>
 
 </html>

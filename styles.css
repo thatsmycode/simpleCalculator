@@ -10,7 +10,7 @@
 }
 
 .calculator-form {
-    max-width: 400px;
+    max-width: 500px;
     margin: 20px auto;
     padding: 15px;
     background-color: white;
@@ -45,4 +45,18 @@
     cursor: pointer;
 }
 
-
+.results{
+    background-color: aliceblue;
+    color:#4caf50;
+    max-width: 500px;
+    margin: auto;
+    padding-left: 15px;
+    border-radius: 10px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30%;
+    font-size: 28px;
+}
