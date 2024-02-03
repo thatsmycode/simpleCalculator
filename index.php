@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calculator</title>
 </head>
+
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
         <label for="userName">Please identify yourself</label>
@@ -19,22 +20,25 @@
         <button type="submit">=</button>
     </form>
 
-<?php
+    <?php
 
-$userName = "";
+    $userName = "";
 
-$operand_1 = "";
-$operand_2 = "";
-$operand_3 = "";
-$result = "";
+    $operand_1 = "";
+    $operand_2 = "";
+    $operand_3 = "";
+    $result = "";
+    $finalResult= "";
 
-$error = false;
-$errorMessage = "";
+    $error = false;
+    $errorMessage = "";
 
-$historyArray = [];
-$OperationFound = false;
-$previousUser = "";
-$historyMessage = "This operation has been already done by " . $previousUser;
+    $sum = true; //by default we sum 
+
+    $historyArray = [];
+    $OperationFound = false;
+    $previousUser = "";
+    $historyMessage = "This operation has been already done by " . $previousUser;
 
 
 
@@ -49,28 +53,46 @@ $historyMessage = "This operation has been already done by " . $previousUser;
         if (isset($_GET["operand3"])) {
             $operand_3 = $_GET["operand3"];
         }
-    
-    
-    if (empty($userName) || empty($operand_1) || empty($operand_2)) {
-        $error = true;
-        $errorMessage = "A username and the first two values are needed";
-    }
 
-    // check inputs contain only numbers or letters
-    else if (!preg_match('/^[a-zA-Z0-9]+$/',$operand_1) || !preg_match('/^[a-zA-Z0-9]+$/',$operand_2) || (!empty($operand_3) && !preg_match('/^[a-zA-Z0-9]+$/',$operand_3))) {
-        $error = true;
-        $errorMessage = "Please, use only numbers and letters, special characters are not allowed.";
-    }
 
-   
-    echo $operand_1 . $operand_2 . $operand_3;
-    echo "<br>";
-    if($error){
-        echo $errorMessage;
-    }
+        if (empty($userName) || empty($operand_1) || empty($operand_2)) {
+            $error = true;
+            $errorMessage = "A username and the first two values are needed";
+        }
 
-}
-?>
+        // check inputs contain only numbers or letters
+        else if (!preg_match('/^[a-zA-Z0-9]+$/', $operand_1) || !preg_match('/^[a-zA-Z0-9]+$/', $operand_2) || (!empty($operand_3) && !preg_match('/^[a-zA-Z0-9]+$/', $operand_3))) {
+            $error = true;
+            $errorMessage = "Please, use only numbers and letters, special characters are not allowed.";
+        }
+
+        // search for letters
+        if (preg_match('/[a-zA-Z]/', $operand_1) || preg_match('/[a-zA-Z]/', $operand_2) || preg_match('/[a-zA-Z]/', $operand_3)) {
+            $sum = false;
+        }
+
+        // if no error and sum, we add. if not concatenate
+        if (!$error && $sum === true) {
+            $result = (int)$operand_1 + (int)$operand_2;
+
+            if ($operand_3) {
+                $result += (int)$operand_3;
+            }
+
+            $finalResult = (int)$result;
+        } else if (!$error) {
+            $finalResult = $operand_1 . $operand_2 . $operand_3;
+        }
+
+        echo $operand_1 . $operand_2 . $operand_3;
+        echo "<br>";
+        if ($error) {
+            echo $errorMessage;
+        }else{
+            echo $finalResult;
+        }
+    }
+    ?>
 
 </body>
 
