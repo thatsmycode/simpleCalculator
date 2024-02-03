@@ -12,6 +12,7 @@ session_start();
     <title>Simple Calculator</title>
     <link rel="icon" type="image/png" href="assets/calc.png">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a28e911298.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="body">
@@ -30,8 +31,8 @@ session_start();
             <button type="submit" class="calculate button">=</button>
         </form>
 
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form">
-            <button type="submit" name="clean_session" class="clean button">Delete operations history</button>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
+            <button type="submit" name="clean_session" class="clean button">Delete operations history  <i class="fa-solid fa-trash-can"></i></button>
         </form>
 
     </section>
