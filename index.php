@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calculator</title>
+    <link rel="icon" type="image/png" href="assets/calc.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
-        <label for="userName">Please identify yourself</label>
-        <input type="text" name="userName" id="userName" placeholder="Your name (required)" required>
+<body class="calculator-body">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="calculator-form">
+        <label for="userName" class="label">Please identify yourself</label>
+        <input type="text" name="userName" id="userName" placeholder="Your name (required)" required class="input">
         <br>
-        <input type="text" name="operand1" id="operand1" placeholder="First input (required)" required>
-        <label>+</label>
-        <input type="text" name="operand2" id="operand2" placeholder="Second input (required)" required>
-        <label>+</label>
-        <input type="text" name="operand3" id="operand3" placeholder="Third input (optional)">
-        <button type="submit">=</button>
+        <label class="label"> Introduce only alphanumeric characters</label>
+        <input type="text" name="operand1" id="operand1" placeholder="First input (required)" required class="input">
+        <label class="label">+</label>
+        <input type="text" name="operand2" id="operand2" placeholder="Second input (required)" required class="input">
+        <label class="label">+</label>
+        <input type="text" name="operand3" id="operand3" placeholder="Third input (optional)" class="input">
+        <button type="submit" class="calculate-button">=</button>
     </form>
 
     <?php
