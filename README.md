@@ -1,6 +1,9 @@
 # simpleCalculator
 This part of a technical test for a junior position.
 
+# Deplyed project link
+https://simplecalculator.adaptable.app/
+
 ## Objectives:
 Create an application using PHP.
 
