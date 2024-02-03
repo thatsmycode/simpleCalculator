@@ -13,8 +13,6 @@ session_set_cookie_params([
     "httponly" => true
 ]);
 
-session_start();
-
 // Regenerate session_id each 30 minutes
 
 if (!isset($_SESSION["last_regeneration"])) {
