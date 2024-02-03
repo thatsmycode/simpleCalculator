@@ -28,6 +28,9 @@ $operand_2 = "";
 $operand_3 = "";
 $result = "";
 
+$error = false;
+$errorMessage = "";
+
 $historyArray = [];
 $OperationFound = false;
 $previousUser = "";
@@ -46,8 +49,27 @@ $historyMessage = "This operation has been already done by " . $previousUser;
         if (isset($_GET["operand3"])) {
             $operand_3 = $_GET["operand3"];
         }
+    
+    
+    if (empty($userName) || empty($operand_1) || empty($operand_2)) {
+        $error = true;
+        $errorMessage = "A username and the first two values are needed";
     }
-    echo $userName . $operand_1 . $operand_2 . $operand_3;
+
+    // check inputs contain only numbers or letters
+    else if (!preg_match('/^[a-zA-Z0-9]+$/',$operand_1) || !preg_match('/^[a-zA-Z0-9]+$/',$operand_2) || (!empty($operand_3) && !preg_match('/^[a-zA-Z0-9]+$/',$operand_3))) {
+        $error = true;
+        $errorMessage = "Please, use only numbers and letters, special characters are not allowed.";
+    }
+
+   
+    echo $operand_1 . $operand_2 . $operand_3;
+    echo "<br>";
+    if($error){
+        echo $errorMessage;
+    }
+
+}
 ?>
 
 </body>
