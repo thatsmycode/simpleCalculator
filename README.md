@@ -5,10 +5,10 @@ This part of a technical test for a junior position.
 Create an application using PHP.
 
 The app is a small calculator that accepts 4 inputs:
-    -username   (mandatory)
-    -operand_1  (mandatory)
-    -operand_2  (mandatory)
-    -operand_3  (optional)
+    1. username   (mandatory)
+    2. operand_1  (mandatory)
+    3. operand_2  (mandatory)
+    4. operand_3  (optional)
 
 The content of these fields must be numerical or alphanumerical.
 
