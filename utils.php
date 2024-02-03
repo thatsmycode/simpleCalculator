@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 class Operation
 {
     private $user = "";
@@ -65,13 +66,13 @@ function processOperation($userName, $operand_1, $operand_2, $operand_3)
     $OperationFound = false;
     $historyMessage = "";
 
-    //Check if all required values are assigned.
+    // Check if all required values are assigned.
     if (empty($userName) || empty($operand_1) || empty($operand_2)) {
         $error = true;
         $errorMessage = "A username and the first two values are needed";
     }
 
-    //Check if any not allowed characters has been submited.
+    // Check if any not allowed characters has been submited.
     else if (!isValidAlphanumeric($operand_1) || !isValidAlphanumeric($operand_2) || (!empty($operand_3) && !isValidAlphanumeric($operand_3))) {
         $error = true;
         $errorMessage = "Please, use only numbers and letters, special characters are not allowed. (Decimals aren't allowed either)";
@@ -81,16 +82,16 @@ function processOperation($userName, $operand_1, $operand_2, $operand_3)
         return $errorMessage;
     }
 
-    //Check if any of the inputs contains alphabetical characters to select if it is a sum or a concatenation.
+    // Check if any of the inputs contains alphabetical characters to select if it is a sum or a concatenation.
     if (containsLetters($operand_1) || containsLetters($operand_2) || containsLetters($operand_3)) {
         $sum = false;
     }
 
     /*
-        Check if this operation has been registered in the historyArray,
-        if it does, the result and previous user who submited the same operation are accessible.
-        If any operation is stored on the session, no search will be done.
-        */
+    *   Check if this operation has been registered in the historyArray,
+    *   if it does, the result and previous user who submited the same operation are accessible.
+    *   If any operation is stored on the session, no search will be done.
+    */
     for ($i = 0; $i < count($historyArray); $i++) {
 
         $currentContent = $historyArray[$i]->getContent();
@@ -108,10 +109,10 @@ function processOperation($userName, $operand_1, $operand_2, $operand_3)
         }
     }
 
-    //If the same operation has ben found in the historyArray, the calculation or concatenation will be skipped.
+    // If the same operation has ben found in the historyArray, the calculation or concatenation will be skipped.
     if (!$OperationFound) {
 
-        //Check for errors and perform addition if it's a sum, or concatenate if not.
+        // Check for errors and perform addition if it's a sum, or concatenate if not.
         if (!$error && $sum === true) {
             $result = (int)$operand_1 + (int)$operand_2;
 
