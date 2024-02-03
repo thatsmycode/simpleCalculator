@@ -16,6 +16,7 @@ session_start();
 
 <body class="body">
     <section>
+        
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="form">
             <label for="userName" class="label">Please identify yourself</label>
             <input type="text" name="userName" id="userName" placeholder="Your name (required)" class="input" required>
@@ -37,7 +38,7 @@ session_start();
 
     <section class="results">
         <?php
-        // Check the submission of the form and assing inputs to variables.
+        // Check the submission of the form and assign inputs to variables.
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["userName"]) && isset($_POST["operand1"]) && isset($_POST["operand2"])) {
             $userName = $_POST["userName"];
             $operand_1 = $_POST["operand1"];
