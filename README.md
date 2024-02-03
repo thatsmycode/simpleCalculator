@@ -18,15 +18,15 @@ if not a concatenation will be the operation to do.
 
 The application must show the result of the operation or a message if any of the mandatory fields are not filled.
 
-Each operation needs to be stored in memmory, saving the name of the user who submits it.
+Each operation needs to be stored in memory, saving the name of the user who submits it.
 
 If an operation has been submited already, the result but also the name of the previous user who submited it will be displayed.
 
 ## Error handling:
 
-The application provider error hadling for the following scenarios:
+The application provides error hadling for the following scenarios:
 
 - Missing mandatory fields
 - Invalid inputs
-- Post request is done via website form
+- Ensures that the request is made via the website form and not externally
 
