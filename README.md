@@ -5,6 +5,7 @@ This part of a technical test for a junior position.
 Create an application using PHP.
 
 The app is a small calculator that accepts 4 inputs:
+
 1. username   (mandatory)
 2. operand_1  (mandatory)
 3. operand_2  (mandatory)
@@ -20,4 +21,12 @@ The application must show the result of the operation or a message if any of the
 Each operation needs to be stored in memmory, saving the name of the user who submits it.
 
 If an operation has been submited already, the result but also the name of the previous user who submited it will be displayed.
+
+## Error handling:
+
+The application provider error hadling for the following scenarios:
+
+- Missing mandatory fields
+- Invalid inputs
+- Post request is done via website form
 
