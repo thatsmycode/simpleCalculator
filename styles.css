@@ -54,6 +54,10 @@
     font-size: 20px;
 }
 
+.calculate:hover{
+    background-color: #12d918;
+}
+
 .clean {
     background-color: red;
     color: white;
@@ -61,6 +65,10 @@
     bottom: 10px;
     right: 15px;
     font-family: Arial, sans-serif;
+}
+
+.clean:hover{
+    color:yellow;
 }
 
 .results {
