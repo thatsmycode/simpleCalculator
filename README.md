@@ -23,11 +23,11 @@ The application must show the result of the operation or a message if any of the
 
 Each operation needs to be stored in memory, saving the name of the user who submits it.
 
-If an operation has been submited already, the result but also the name of the previous user who submited it will be displayed.
+If an operation has been submitted already, the result but also the name of the previous user who submited it will be displayed.
 
 ## Error handling:
 
-The application provides error hadling for the following scenarios:
+The application provides error handling for the following scenarios:
 
 - Missing mandatory fields
 - Invalid inputs
@@ -35,7 +35,7 @@ The application provides error hadling for the following scenarios:
 
 ## Security
 
-As the application uses sessions to store in memory the operations the following mesures have been implemented:
+As the application uses sessions to store in memory the operations the following measures have been implemented:
 
 - Ensure PHP sessions are only maintained using cookies
 - Enable strict mode to help prevent session fixation attacks
