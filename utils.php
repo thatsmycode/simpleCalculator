@@ -2,7 +2,7 @@
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+} 
 
 class Operation
 {
@@ -65,7 +65,7 @@ function processOperation($userName, $operand_1, $operand_2, $operand_3)
     $finalResult = "";
     $error = false;
     $errorMessage = "";
-    $historyArray = (array) (isset($_SESSION["sessionList"]) ? $_SESSION["sessionList"] : []);
+    $historyArray = (array) (isset($_SESSION["sessionList"]) ? unserialize($_SESSION["sessionList"]) : []);
     $OperationFound = false;
     $historyMessage = "";
 
@@ -141,7 +141,7 @@ function processOperation($userName, $operand_1, $operand_2, $operand_3)
 
             $historyArray[] = $newOperation;
 
-            $_SESSION["sessionList"] = $historyArray;
+            $_SESSION["sessionList"] = serialize($historyArray);
         }
     }
     $returnContent = $OperationFound ?  $historyMessage . " and the result is : " . $finalResult : $finalResult;

@@ -1,0 +1,40 @@
+1.
+
+SELECT * 
+FROM Clients
+ORDER BY idClient ASC
+LIMIT 15;
+
+2.
+
+SELECT SUM(baseImponible) AS totalBaseImponible, COUNT(idFactura) AS quantitatFactures
+FROM Factures 
+INNER JOIN Clients ON Factures.idClient = Clients.idClient
+WHERE Clients.CIF = 'A779118';
+
+3.
+
+SELECT *
+FROM Factures
+WHERE Factures.idFactura IN 
+    (SELECT Linies_Factura.idFactura
+    FROM Linies_Factura
+    WHERE Linies_Factura.idProducte = 35);
+
+4.
+
+DELETE 
+FROM Factures
+WHERE CIF LIKE 'C%' AND baseImponible > 1000;
+
+5.
+
+UPDATE Factures
+SET estatPagament = 'Pagat'
+WHERE idFactura IN
+    (SELECT Linies_Factura.idFactura
+    FROM Linies_Factura
+    WHERE Linies_Factura.idProducte IN
+        (SELECT idProducte
+        FROM Productes
+        WHERE Productes.preuVenda > Productes.preuCost));

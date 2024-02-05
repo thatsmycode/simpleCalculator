@@ -7,13 +7,12 @@ ini_set("session.use_strict_mode", 1);
 
 session_set_cookie_params([
     "lifetime" => 3600,
-    "domain" => "simplecalculator.adaptable.app/index.php",
-    "path" => "/",
     "secure" => true,
     "httponly" => true
 ]);
 
 session_start();
+
 
 // Regenerate session_id each 30 minutes
 
